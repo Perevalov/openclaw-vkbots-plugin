@@ -1,4 +1,4 @@
-# openclaw-vkbots-plugin
+# OpenClaw VK bots plugin
 
 Community VK Bots channel plugin for OpenClaw.
 
