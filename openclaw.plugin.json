@@ -1,0 +1,10 @@
+{
+  "id": "openclaw-vkbots-plugin",
+  "kind": "channel",
+  "channels": ["vk"],
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {}
+  }
+}

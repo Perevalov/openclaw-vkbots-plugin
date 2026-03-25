@@ -1,0 +1,75 @@
+{
+  "name": "openclaw-vkbots-plugin",
+  "version": "0.1.0",
+  "description": "Community VK Bots channel plugin for OpenClaw",
+  "type": "module",
+  "files": [
+    "index.ts",
+    "setup-entry.ts",
+    "openclaw.plugin.json",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "check": "tsc --noEmit",
+    "test": "vitest run src/channel.test.ts"
+  },
+  "dependencies": {
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "openclaw": "^2026.3.22",
+    "typescript": "^5.9.2",
+    "vitest": "^4.1.0"
+  },
+  "peerDependencies": {
+    "openclaw": ">=2026.3.22"
+  },
+  "peerDependenciesMeta": {
+    "openclaw": {
+      "optional": true
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openclaw-space/openclaw-vkbots-plugin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/openclaw-space/openclaw-vkbots-plugin/issues"
+  },
+  "homepage": "https://github.com/openclaw-space/openclaw-vkbots-plugin#readme",
+  "keywords": [
+    "openclaw",
+    "plugin",
+    "channel",
+    "vk"
+  ],
+  "license": "MIT",
+  "openclaw": {
+    "extensions": [
+      "./index.ts"
+    ],
+    "setupEntry": "./setup-entry.ts",
+    "channel": {
+      "id": "vk",
+      "label": "VK",
+      "selectionLabel": "VK (Long Poll API)",
+      "detailLabel": "VK Bots plugin",
+      "docsPath": "/plugins/community",
+      "docsLabel": "Community plugins",
+      "blurb": "VK group bot via Long Poll API for direct-message routing.",
+      "order": 85,
+      "quickstartAllowFrom": true
+    },
+    "install": {
+      "npmSpec": "openclaw-vkbots-plugin",
+      "defaultChoice": "npm",
+      "minHostVersion": ">=2026.3.22"
+    },
+    "release": {
+      "publishToNpm": true
+    }
+  }
+}
