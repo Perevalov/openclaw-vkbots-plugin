@@ -12,8 +12,10 @@
     "LICENSE"
   ],
   "scripts": {
+    "prepare": "git config core.hooksPath .githooks || true",
     "check": "tsc --noEmit",
-    "test": "vitest run src/channel.test.ts"
+    "test": "vitest run src/channel.test.ts",
+    "check:commit-message": "node scripts/validate-commit-msg.mjs"
   },
   "dependencies": {
     "zod": "^4.3.6"
