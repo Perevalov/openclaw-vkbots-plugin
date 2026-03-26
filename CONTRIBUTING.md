@@ -129,6 +129,34 @@ This repo enforces the policy with a local Git `commit-msg` hook.
 This plugin is intended to be released independently from the main OpenClaw
 repo.
 
+Versioning policy:
+
+- stable releases use `YYYY.M.K`
+- beta releases use `YYYY.M.K-beta.N`
+
+Examples:
+
+- `2026.3.1`
+- `2026.3.2`
+- `2026.3.3-beta.1`
+- `2026.3.3-beta.2`
+
+Release tags must use:
+
+- `vYYYY.M.K`
+- `vYYYY.M.K-beta.N`
+
+This repo uses Changesets for release notes and changelog management.
+
+For user-visible changes, add a changeset:
+
+```bash
+pnpm changeset
+```
+
+When a release is prepared, Changesets updates package versions and
+`CHANGELOG.md`.
+
 When preparing a release:
 
 - update the changelog/release notes

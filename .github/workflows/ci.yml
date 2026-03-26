@@ -1,0 +1,92 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check-and-test:
+    name: Check and Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Require changeset for user-facing changes
+        if: github.event_name == 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          BASE_REF="origin/${{ github.base_ref }}"
+          git fetch origin "${{ github.base_ref }}" --depth=1
+
+          CHANGED_FILES="$(git diff --name-only "${BASE_REF}...HEAD")"
+          echo "Changed files:"
+          echo "${CHANGED_FILES}"
+
+          if [ -z "${CHANGED_FILES}" ]; then
+            echo "No changed files detected."
+            exit 0
+          fi
+
+          NEEDS_CHANGESET=0
+          HAS_CHANGESET=0
+
+          while IFS= read -r file; do
+            [ -z "$file" ] && continue
+
+            case "$file" in
+              .changeset/*.md)
+                HAS_CHANGESET=1
+                ;;
+              README.md|CONTRIBUTING.md|LICENSE|.gitignore|.github/*|.githooks/*|scripts/*|*.md)
+                ;;
+              *)
+                NEEDS_CHANGESET=1
+                ;;
+            esac
+          done <<EOF
+          ${CHANGED_FILES}
+          EOF
+
+          if [ "$NEEDS_CHANGESET" -eq 1 ] && [ "$HAS_CHANGESET" -ne 1 ]; then
+            echo "User-facing or package changes detected without a changeset."
+            echo "Run: pnpm changeset"
+            exit 1
+          fi
+
+          echo "Changeset check passed."
+
+      - name: Typecheck
+        run: pnpm check
+
+      - name: Validate version schema
+        run: pnpm check:version
+
+      - name: Test
+        run: pnpm test
