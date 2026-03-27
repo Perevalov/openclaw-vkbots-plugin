@@ -1,0 +1,10 @@
+{
+  "id": "vk",
+  "kind": "channel",
+  "channels": ["vk"],
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {}
+  }
+}

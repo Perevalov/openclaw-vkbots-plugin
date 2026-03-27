@@ -1,0 +1,82 @@
+{
+  "name": "vk",
+  "version": "2026.1.0-beta.0",
+  "description": "Community VK Bots channel plugin for OpenClaw",
+  "type": "module",
+  "files": [
+    "index.ts",
+    "setup-entry.ts",
+    "openclaw.plugin.json",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "prepare": "git config core.hooksPath .githooks || true",
+    "check": "tsc --noEmit",
+    "test": "vitest run src/*.test.ts",
+    "check:commit-message": "node scripts/validate-commit-msg.mjs",
+    "check:version": "node scripts/validate-version.mjs",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "changeset publish"
+  },
+  "dependencies": {
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.29.5",
+    "@types/node": "^24.0.0",
+    "openclaw": "^2026.3.22",
+    "typescript": "^5.9.2",
+    "vitest": "^4.1.0"
+  },
+  "peerDependencies": {
+    "openclaw": ">=2026.3.22"
+  },
+  "peerDependenciesMeta": {
+    "openclaw": {
+      "optional": true
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openclaw-space/openclaw-vkbots-plugin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/openclaw-space/openclaw-vkbots-plugin/issues"
+  },
+  "homepage": "https://github.com/openclaw-space/openclaw-vkbots-plugin#readme",
+  "keywords": [
+    "openclaw",
+    "plugin",
+    "channel",
+    "vk"
+  ],
+  "license": "MIT",
+  "openclaw": {
+    "extensions": [
+      "./index.ts"
+    ],
+    "setupEntry": "./setup-entry.ts",
+    "channel": {
+      "id": "vk",
+      "label": "VK",
+      "selectionLabel": "VK (Long Poll API)",
+      "detailLabel": "VK Bots plugin",
+      "docsPath": "/plugins/community",
+      "docsLabel": "Community plugins",
+      "blurb": "VK group bot via Long Poll API for direct-message routing.",
+      "order": 85,
+      "quickstartAllowFrom": true
+    },
+    "install": {
+      "npmSpec": "openclaw-vkbots-plugin",
+      "defaultChoice": "npm",
+      "minHostVersion": ">=2026.3.22"
+    },
+    "release": {
+      "publishToNpm": true
+    }
+  }
+}
