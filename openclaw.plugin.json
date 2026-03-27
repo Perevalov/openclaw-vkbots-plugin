@@ -1,5 +1,5 @@
 {
-  "id": "openclaw-vkbots-plugin",
+  "id": "vk",
   "kind": "channel",
   "channels": ["vk"],
   "configSchema": {

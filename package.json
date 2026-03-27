@@ -41,12 +41,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/openclaw-space/openclaw-vkbots-plugin.git"
+    "url": "git+https://github.com/perevalov/openclaw-vkbots-plugin.git"
   },
   "bugs": {
-    "url": "https://github.com/openclaw-space/openclaw-vkbots-plugin/issues"
+    "url": "https://github.com/perevalov/openclaw-vkbots-plugin/issues"
   },
-  "homepage": "https://github.com/openclaw-space/openclaw-vkbots-plugin#readme",
+  "homepage": "https://github.com/perevalov/openclaw-vkbots-plugin#readme",
   "keywords": [
     "openclaw",
     "plugin",
@@ -58,6 +58,9 @@
     "extensions": [
       "./index.ts"
     ],
+    "compat": {
+      "pluginApi": ">=2026.3.24"
+    },
     "setupEntry": "./setup-entry.ts",
     "channel": {
       "id": "vk",

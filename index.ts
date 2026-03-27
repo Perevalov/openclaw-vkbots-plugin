@@ -6,7 +6,7 @@ export { vkPlugin } from "./src/channel.js";
 export { setVkRuntime } from "./src/runtime.js";
 
 export default defineChannelPluginEntry({
-  id: "openclaw-vkbots-plugin",
+  id: "vk",
   name: "VK",
   description: "VK channel plugin",
   plugin: vkPlugin,

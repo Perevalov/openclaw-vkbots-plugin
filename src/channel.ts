@@ -73,9 +73,9 @@ const vkRawSendResultAdapter = createRawChannelSendResultAdapter({
 
 export const vkPlugin: ChannelPlugin<ResolvedVkAccount, VkProbeResult> = createChatChannelPlugin({
   base: {
-    id: "openclaw-vkbots-plugin",
+    id: "vk",
     meta: {
-      id: "openclaw-vkbots-plugin",
+      id: "vk",
       label: "VK",
       selectionLabel: "VK (Long Poll API)",
       detailLabel: "VK Bots plugin",
