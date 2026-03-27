@@ -12,7 +12,8 @@ function requireResolveDmPolicy() {
 
 describe("vkPlugin", () => {
   it("has expected metadata", () => {
-    expect(vkPlugin.id).toBe("vk");
+    expect(vkPlugin.id).toBe("openclaw-vkbots-plugin");
+    expect(vkPlugin.meta.id).toBe("openclaw-vkbots-plugin");
     expect(vkPlugin.meta.label).toBe("VK");
     expect(vkPlugin.meta.docsPath).toBe("/plugins/community");
   });
