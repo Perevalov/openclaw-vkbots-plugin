@@ -1,5 +1,5 @@
 {
-  "name": "vk",
+  "name": "openclaw-vkbots-plugin",
   "version": "2026.1.0-beta.0",
   "description": "Community VK Bots channel plugin for OpenClaw",
   "type": "module",
