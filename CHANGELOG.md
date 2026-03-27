@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026.1.1
+
+### Patch Changes
+
+- bdcaa43: fix: update plugin metadata and installation instructions for VK channel
+
 ## 2026.1.0
 
 ### Minor Changes
