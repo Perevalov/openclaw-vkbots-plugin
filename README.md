@@ -8,7 +8,7 @@ From npm:
 
 ```bash
 openclaw onboard --install-daemon
-openclaw plugins install openclaw-vkbots-plugin
+openclaw plugins install vk-plugin
 ```
 
 From a local checkout:
@@ -108,7 +108,7 @@ openclaw gateway run --force
 This package is intended to be published to npm so it can be installed with:
 
 ```bash
-openclaw plugins install openclaw-vkbots-plugin
+openclaw plugins install vk-plugin
 ```
 
 ## Versioning

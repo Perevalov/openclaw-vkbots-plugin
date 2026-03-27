@@ -25,8 +25,8 @@ describe("plugin package metadata", () => {
       readFileSync(join(import.meta.dirname, "..", "openclaw.plugin.json"), "utf8"),
     ) as PluginManifest;
 
-    expect(packageJson.name).toBe("openclaw-vkbots-plugin");
-    expect(packageJson.openclaw?.extensions).toBeUndefined();
+    expect(packageJson.name).toBe("vk-plugin");
+    expect(packageJson.openclaw?.extensions).toEqual(["./index.ts"]);
     expect(manifest.id).toBe("vk");
     expect(pluginEntry.id).toBe("vk");
     expect(vkPlugin.id).toBe("vk");
