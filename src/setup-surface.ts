@@ -98,7 +98,7 @@ const vkDmPolicy: ChannelSetupDmPolicy = createTopLevelChannelDmPolicy({
   channel,
   policyKey: "channels.vk.dmPolicy",
   allowFromKey: "channels.vk.allowFrom",
-  getCurrent: (cfg) => (cfg.channels?.vk?.dmPolicy ?? "pairing") as "pairing",
+  getCurrent: (cfg) => cfg.channels?.vk?.dmPolicy ?? "pairing",
   promptAllowFrom: async ({ cfg, prompter, accountId }) => {
     const id =
       accountId && normalizeAccountId(accountId)

@@ -7,18 +7,10 @@ export async function probeVkAccount(params: {
 }): Promise<VkProbeResult> {
   const controller = new AbortController();
   const timeoutMs = params.timeoutMs ?? 2500;
+  const timeoutMessage = `VK probe timed out after ${String(timeoutMs)}ms`;
   const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
-    const groups = await Promise.race([
-      getVkGroupsById(params.account.token, controller.signal),
-      new Promise<never>((_, reject) => {
-        controller.signal.addEventListener(
-          "abort",
-          () => reject(new Error(`VK probe timed out after ${String(timeoutMs)}ms`)),
-          { once: true },
-        );
-      }),
-    ]);
+    const groups = await getVkGroupsById(params.account.token, controller.signal);
     const group = groups[0];
     if (!group) {
       return {
@@ -35,6 +27,16 @@ export async function probeVkAccount(params: {
       },
     };
   } catch (err) {
+    if (
+      controller.signal.aborted ||
+      (err instanceof DOMException && err.name === "AbortError") ||
+      (err instanceof Error && err.name === "AbortError")
+    ) {
+      return {
+        ok: false,
+        error: timeoutMessage,
+      };
+    }
     return {
       ok: false,
       error: err instanceof Error ? err.message : String(err),

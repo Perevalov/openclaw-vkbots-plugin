@@ -238,7 +238,7 @@ export async function monitorVkProvider(params: VkMonitorOptions): Promise<void>
     accountId: account.accountId,
   });
 
-  const groups = await getVkGroupsById(token);
+  const groups = await getVkGroupsById(token, abortSignal);
   const group = groups[0];
   if (!group) {
     throw new Error("VK token did not resolve a group");
@@ -254,13 +254,14 @@ export async function monitorVkProvider(params: VkMonitorOptions): Promise<void>
     lastError: null,
   });
 
-  let longPoll = await getVkLongPollServer(token, group.id);
+  let longPoll = await getVkLongPollServer(token, group.id, abortSignal);
   while (!abortSignal.aborted) {
     try {
       const data = await pollVkLongPoll({
         server: longPoll.server,
         key: longPoll.key,
         ts: longPoll.ts,
+        signal: abortSignal,
       });
 
       if (data.failed) {
@@ -269,7 +270,7 @@ export async function monitorVkProvider(params: VkMonitorOptions): Promise<void>
           continue;
         }
         log?.warn?.(`[${account.accountId}] VK long poll failed=${String(data.failed)}, reconnecting`);
-        longPoll = await getVkLongPollServer(token, group.id);
+        longPoll = await getVkLongPollServer(token, group.id, abortSignal);
         continue;
       }
 
@@ -305,7 +306,7 @@ export async function monitorVkProvider(params: VkMonitorOptions): Promise<void>
         break;
       }
       try {
-        longPoll = await getVkLongPollServer(token, group.id);
+        longPoll = await getVkLongPollServer(token, group.id, abortSignal);
         statusSink({
           connected: true,
           lastConnectedAt: Date.now(),

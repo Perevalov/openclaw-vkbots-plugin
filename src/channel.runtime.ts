@@ -8,8 +8,9 @@ import type { ResolvedVkAccount } from "./types.js";
 export async function notifyVkPairingApproval(params: {
   cfg: import("openclaw/plugin-sdk/core").OpenClawConfig;
   id: string;
+  accountId?: string;
 }) {
-  const account = resolveVkAccount({ cfg: params.cfg });
+  const account = resolveVkAccount({ cfg: params.cfg, accountId: params.accountId });
   if (!account.token) {
     throw new Error("VK token not configured");
   }

@@ -165,7 +165,8 @@ export const vkPlugin: ChannelPlugin<ResolvedVkAccount, VkProbeResult> = createC
       idLabel: "vkUserId",
       message: PAIRING_APPROVED_MESSAGE,
       normalizeAllowEntry: (entry) => entry.trim().replace(/^vk:/i, ""),
-      notify: async ({ cfg, id }) => await notifyVkPairingApproval({ cfg, id }),
+      notify: async ({ cfg, id, accountId }) =>
+        await notifyVkPairingApproval({ cfg, id, accountId }),
     },
   },
   threading: {

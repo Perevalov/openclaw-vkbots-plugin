@@ -90,10 +90,14 @@ export async function sendVkMessage(params: {
   return { messageId: String(response) };
 }
 
-export async function getVkLongPollServer(token: string, groupId: number): Promise<VkLongPollServer> {
+export async function getVkLongPollServer(
+  token: string,
+  groupId: number,
+  signal?: AbortSignal,
+): Promise<VkLongPollServer> {
   return await vkApi(token, "groups.getLongPollServer", {
     group_id: groupId,
-  });
+  }, signal);
 }
 
 export async function pollVkLongPoll(params: {
@@ -101,11 +105,12 @@ export async function pollVkLongPoll(params: {
   key: string;
   ts: string;
   waitSeconds?: number;
+  signal?: AbortSignal;
 }): Promise<VkLongPollResponse> {
   const url = new URL(params.server);
   url.searchParams.set("act", "a_check");
   url.searchParams.set("key", params.key);
   url.searchParams.set("ts", params.ts);
   url.searchParams.set("wait", String(params.waitSeconds ?? 25));
-  return await readVkJson<VkLongPollResponse>(await fetch(url));
+  return await readVkJson<VkLongPollResponse>(await fetch(url, { signal: params.signal }));
 }
