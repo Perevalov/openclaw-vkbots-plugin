@@ -6,6 +6,9 @@ import { vkPlugin } from "./channel.js";
 
 type PackageJson = {
   name?: string;
+  openclaw?: {
+    extensions?: string[];
+  };
 };
 
 type PluginManifest = {
@@ -13,8 +16,8 @@ type PluginManifest = {
   channels?: string[];
 };
 
-describe("plugin identity", () => {
-  it("keeps package, manifest, entry, and channel plugin ids aligned", () => {
+describe("plugin package metadata", () => {
+  it("keeps npm package name separate from the registered vk channel id", () => {
     const packageJson = JSON.parse(
       readFileSync(join(import.meta.dirname, "..", "package.json"), "utf8"),
     ) as PackageJson;
@@ -22,11 +25,12 @@ describe("plugin identity", () => {
       readFileSync(join(import.meta.dirname, "..", "openclaw.plugin.json"), "utf8"),
     ) as PluginManifest;
 
-    expect(packageJson.name).toBe("openclaw-vkbots-plugin");
-    expect(manifest.id).toBe("openclaw-vkbots-plugin");
-    expect(pluginEntry.id).toBe("openclaw-vkbots-plugin");
-    expect(vkPlugin.id).toBe("openclaw-vkbots-plugin");
-    expect(vkPlugin.meta.id).toBe("openclaw-vkbots-plugin");
+    expect(packageJson.name).toBe("vk-plugin");
+    expect(packageJson.openclaw?.extensions).toEqual(["./index.ts"]);
+    expect(manifest.id).toBe("vk");
+    expect(pluginEntry.id).toBe("vk");
+    expect(vkPlugin.id).toBe("vk");
+    expect(vkPlugin.meta.id).toBe("vk");
     expect(manifest.channels).toEqual(["vk"]);
   });
 });

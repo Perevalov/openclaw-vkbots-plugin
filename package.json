@@ -1,5 +1,5 @@
 {
-  "name": "openclaw-vkbots-plugin",
+  "name": "vk-plugin",
   "version": "2026.1.0",
   "description": "Community VK Bots channel plugin for OpenClaw",
   "type": "module",
@@ -41,12 +41,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/openclaw-space/openclaw-vkbots-plugin.git"
+    "url": "git+https://github.com/perevalov/openclaw-vkbots-plugin.git"
   },
   "bugs": {
-    "url": "https://github.com/openclaw-space/openclaw-vkbots-plugin/issues"
+    "url": "https://github.com/perevalov/openclaw-vkbots-plugin/issues"
   },
-  "homepage": "https://github.com/openclaw-space/openclaw-vkbots-plugin#readme",
+  "homepage": "https://github.com/perevalov/openclaw-vkbots-plugin#readme",
   "keywords": [
     "openclaw",
     "plugin",
@@ -58,6 +58,9 @@
     "extensions": [
       "./index.ts"
     ],
+    "compat": {
+      "pluginApi": ">=2026.3.24"
+    },
     "setupEntry": "./setup-entry.ts",
     "channel": {
       "id": "vk",
@@ -71,7 +74,7 @@
       "quickstartAllowFrom": true
     },
     "install": {
-      "npmSpec": "openclaw-vkbots-plugin",
+      "npmSpec": "vk-plugin",
       "defaultChoice": "npm",
       "minHostVersion": ">=2026.3.22"
     },
