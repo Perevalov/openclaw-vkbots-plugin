@@ -55,9 +55,6 @@
   ],
   "license": "MIT",
   "openclaw": {
-    "extensions": [
-      "./index.ts"
-    ],
     "compat": {
       "pluginApi": ">=2026.3.24"
     },

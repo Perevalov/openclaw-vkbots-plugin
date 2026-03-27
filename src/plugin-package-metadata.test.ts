@@ -6,6 +6,9 @@ import { vkPlugin } from "./channel.js";
 
 type PackageJson = {
   name?: string;
+  openclaw?: {
+    extensions?: string[];
+  };
 };
 
 type PluginManifest = {
@@ -23,6 +26,7 @@ describe("plugin package metadata", () => {
     ) as PluginManifest;
 
     expect(packageJson.name).toBe("openclaw-vkbots-plugin");
+    expect(packageJson.openclaw?.extensions).toBeUndefined();
     expect(manifest.id).toBe("vk");
     expect(pluginEntry.id).toBe("vk");
     expect(vkPlugin.id).toBe("vk");
