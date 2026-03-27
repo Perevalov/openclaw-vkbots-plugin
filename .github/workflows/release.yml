@@ -48,6 +48,13 @@ jobs:
       - name: Test
         run: pnpm test
 
+      - name: Verify npm auth
+        run: |
+          npm whoami
+          npm config get registry
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - name: Create Release PR or Publish
         uses: changesets/action@v1
         with:
@@ -59,3 +66,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
